@@ -1,66 +1,91 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Animated, Dimensions, StyleSheet, View } from 'react-native'
 
-import { Slide, SLIDE_HEIGHT } from './Slide'
+import { Slide } from './Slide'
 import theme from '../../styles/theme'
 
-const { width } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
+
+const FOOTER_HEIGHT = 320
 
 const styles = StyleSheet.create({
   container: {
+    height,
     flex: 1,
-    backgroundColor: 'white'
+    position: 'relative'
   },
   slider: {
-    height: SLIDE_HEIGHT,
-    borderBottomRightRadius: 80
-  },
-  footer: {
     flex: 1
   },
-  footerInner: {
-    borderTopLeftRadius: 80,
-    backgroundColor: 'white'
+  backdropInner: {
+    height: FOOTER_HEIGHT,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: theme.colors.white,
+    borderTopLeftRadius: theme.borderRadius.XXL
   }
 })
 
-const slides = [
-  { label: 'Relaxed', color: theme.colors.onboarding[0] },
-  { label: 'Playful', color: theme.colors.onboarding[1], right: true },
-  { label: 'Excentric', color: theme.colors.onboarding[2] },
-  { label: 'Funky', color: theme.colors.onboarding[3], right: true }
+const slideBackgrounds = [
+  theme.colors.onboarding[0],
+  theme.colors.onboarding[1],
+  theme.colors.onboarding[2],
+  theme.colors.onboarding[3]
 ]
 
 export const Onboarding = () => {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+  const topSliderRef = useRef(null as any)
   const scrollX = useRef(new Animated.Value(0)).current
 
   const backgroundColor = scrollX.interpolate({
-    inputRange: slides.map((_, i) => i * width),
-    outputRange: slides.map((slide) => slide.color)
+    inputRange: slideBackgrounds.map((_, i) => i * width),
+    outputRange: slideBackgrounds
   })
+
+  const onButtonPress = () => {
+    const nextSlide = currentSlideIndex + 1
+    // @ts-ignore
+    topSliderRef.current.scrollTo({ x: width + scrollX._value })
+    setCurrentSlideIndex(nextSlide)
+  }
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.slider, { backgroundColor }]}>
-        <Animated.FlatList
-          data={slides}
+      <Animated.View style={[StyleSheet.absoluteFillObject, { backgroundColor }]}>
+        <View style={styles.backdropInner} />
+      </Animated.View>
+      <View style={styles.slider}>
+        <Animated.ScrollView
+          ref={topSliderRef}
           horizontal
           pagingEnabled
           scrollEventThrottle={32}
-          contentContainerStyle={{ paddingBottom: 100 }}
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => <Slide label={item.label} right={item.right} />}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { x: scrollX } } }],
             { useNativeDriver: false }
           )}
-        />
-      </Animated.View>
-      <Animated.View style={[styles.footer, { backgroundColor }]}>
-        <View style={[StyleSheet.absoluteFillObject, styles.footerInner]}>
+        >
+          <Slide label={'Relaxed'} title='Find Your Outfits'
+                 description='Confused about your outfit? Don’t worry! Find the best outfit here!'
+                 footerHeight={FOOTER_HEIGHT} onButtonPress={onButtonPress} />
 
-        </View>
-      </Animated.View>
+          <Slide label={'Playful'} right title='Hear it First, Wear it First'
+                 description='Confused about your outfit? Don’t worry! Find the best outfit here!'
+                 footerHeight={FOOTER_HEIGHT} onButtonPress={onButtonPress} />
+
+          <Slide label={'Excentric'} title='Your Style, Your Way'
+                 description='Confused about your outfit? Don’t worry! Find the best outfit here!'
+                 footerHeight={FOOTER_HEIGHT} onButtonPress={onButtonPress} />
+
+          <Slide label={'Funky'} right title='Look Good, Feel Good'
+                 description='Confused about your outfit? Don’t worry! Find the best outfit here!'
+                 footerHeight={FOOTER_HEIGHT} onButtonPress={onButtonPress} buttonType='primary' />
+        </Animated.ScrollView>
+      </View>
     </View>
   )
 }
