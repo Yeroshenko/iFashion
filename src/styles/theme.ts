@@ -1,4 +1,4 @@
-export default {
+export const theme = {
   fonts: {
     SFProTextBold: 'SFProText-Bold',
     SFProTextSemibold: 'SFProText-Semibold',
@@ -9,10 +9,11 @@ export default {
     primary: '#2CB9B0',
     main: '#0C0D34',
     defaultBtn: '#F3F3F5',
-    onboarding: ['#BFEAF5', '#BEECC4', '#FFE4D9', '#FFDDDD'],
+    onboarding: ['#BFEAF5', '#BEECC4', '#FFE4D9', '#FFDDDD']
   },
   borderRadius: {
     XXL: 80,
     XL: 25
-  }
+  },
+  activeOpacity: 0.4
 }

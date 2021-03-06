@@ -1,9 +1,8 @@
 import React from 'react'
 import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
 
-import { Onboarding } from './src/Auth'
+import { AuthNavigation } from './src/navigations'
 import { LoadAssets } from './src/components'
 
 const fonts = {
@@ -12,13 +11,6 @@ const fonts = {
   'SFProText-Regular': require('./assets/fonts/SF-Pro-Text-Regular.otf')
 }
 
-const AuthStack = createStackNavigator()
-
-const AuthNavigation = () => (
-  <AuthStack.Navigator headerMode='none'>
-    <AuthStack.Screen name='Onboarding' component={Onboarding} />
-  </AuthStack.Navigator>
-)
 
 export default function App() {
   return (

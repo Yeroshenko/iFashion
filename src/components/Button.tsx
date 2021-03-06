@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native'
-import theme from '../styles/theme'
+
+import { theme } from '../styles'
 
 export type ButtonType = 'primary' | 'default'
 
@@ -32,9 +33,7 @@ const typeToColor = (type: ButtonType): StyleProp<TextStyle> => ({
 })
 
 export const Button: FC<ButtonProps> = ({ title, type = 'default', onPress }) => (
-  <TouchableOpacity style={[styles.wrapper, typeToBg(type)]} onPress={onPress}>
+  <TouchableOpacity style={[styles.wrapper, typeToBg(type)]} onPress={onPress} activeOpacity={theme.activeOpacity}>
     <Text style={[styles.text, typeToColor(type)]}>{title}</Text>
   </TouchableOpacity>
 )
-
-

@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
-import theme from '../../styles/theme'
-import { Button, ButtonType } from '../../components'
+
+import { theme } from '../../../styles'
+import { Button, ButtonType } from '../../../components'
+
 
 type SlideProps = {
   label: string
@@ -9,6 +11,7 @@ type SlideProps = {
   footerHeight: number
   title: string
   description: string
+  buttonText?: string
   buttonType?: ButtonType
   onButtonPress?: () => void
 }
@@ -58,6 +61,7 @@ const styles = StyleSheet.create({
   }
 })
 
+
 export const Slide: FC<SlideProps> = (
   {
     label,
@@ -66,6 +70,7 @@ export const Slide: FC<SlideProps> = (
     title,
     description,
     buttonType = 'default',
+    buttonText = 'Next',
     onButtonPress
   }
 ) => {
@@ -87,7 +92,7 @@ export const Slide: FC<SlideProps> = (
       <View style={[styles.footer, { height: footerHeight }]}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
-        <Button title='Next' type={buttonType} onPress={onButtonPress} />
+        <Button title={buttonText} type={buttonType} onPress={onButtonPress} />
       </View>
     </View>
   )

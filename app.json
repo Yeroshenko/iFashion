@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Fashion app",
+    "githubUrl": "https://github.com/Yeroshenko/iFashion"
   }
 }
