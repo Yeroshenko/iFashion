@@ -1,2 +1,2 @@
-export * from './Auth/Onboarding'
-export * from './Auth/Welcome'
+export * from './Onboarding/Onboarding'
+export * from './Onboarding/Welcome'
