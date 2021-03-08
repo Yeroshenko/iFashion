@@ -1,7 +1,12 @@
 import { ButtonType } from '../../components'
 import { Animated } from 'react-native'
 
-export type BackdropInnerProps = {
+
+export type BackdropTopProps = {
+  bottomHeight: number
+}
+
+export type BackdropBottomProps = {
   height: number
 }
 

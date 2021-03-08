@@ -6,7 +6,13 @@ import { Slide } from './Slide'
 import { ScrollIndicator } from './ScrollIndicator'
 import { isLastItem, isOdd } from '../../utils'
 import { navigationPaths } from '../../constants'
-import { BackdropInner, OnboardingContainer, OnboardingSlider } from './styles'
+import {
+  BackdropTop,
+  BackdropTopInner,
+  BackdropBottom,
+  OnboardingContainer,
+  OnboardingSlider
+} from './styles'
 
 
 const FOOTER_HEIGHT = 300
@@ -38,6 +44,7 @@ const slidesInfo = [
   }
 ]
 
+
 export const Onboarding: FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const navigation = useNavigation()
@@ -63,7 +70,10 @@ export const Onboarding: FC = () => {
   return (
     <OnboardingContainer>
       <Animated.View style={[StyleSheet.absoluteFillObject, { backgroundColor }]}>
-        <BackdropInner height={FOOTER_HEIGHT} />
+        <BackdropTop bottomHeight={FOOTER_HEIGHT}>
+          <BackdropTopInner style={{ backgroundColor }} />
+        </BackdropTop>
+        <BackdropBottom height={FOOTER_HEIGHT} />
       </Animated.View>
       <ScrollIndicator scrollX={scrollX} slidesInfo={slidesInfo} slideWidth={width} />
       <OnboardingSlider>
@@ -73,20 +83,36 @@ export const Onboarding: FC = () => {
           pagingEnabled
           scrollEventThrottle={32}
           showsHorizontalScrollIndicator={false}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-            { useNativeDriver: false }
-          )}
+          onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+            useNativeDriver: false
+          })}
         >
-          {slidesInfo.map(({ label, title, description }, i) => (
-            isLastItem(slidesInfo, i)
-              ? <Slide key={label + i} label={label} title={title} description={description} right={isOdd(i)}
-                       footerHeight={FOOTER_HEIGHT} onButtonPress={onStartedButtonPress} buttonType='primary'
-                       buttonText='Let’s get started' />
-
-              : <Slide key={label + i} label={label} title={title} description={description} right={isOdd(i)}
-                       footerHeight={FOOTER_HEIGHT} onButtonPress={onNextButtonPress} buttonText='Next' />
-          ))}
+          {slidesInfo.map(({ label, title, description }, i) =>
+            isLastItem(slidesInfo, i) ? (
+              <Slide
+                key={label + i}
+                label={label}
+                title={title}
+                description={description}
+                right={isOdd(i)}
+                footerHeight={FOOTER_HEIGHT}
+                onButtonPress={onStartedButtonPress}
+                buttonType='primary'
+                buttonText='Let’s get started'
+              />
+            ) : (
+              <Slide
+                key={label + i}
+                label={label}
+                title={title}
+                description={description}
+                right={isOdd(i)}
+                footerHeight={FOOTER_HEIGHT}
+                onButtonPress={onNextButtonPress}
+                buttonText='Next'
+              />
+            )
+          )}
         </Animated.ScrollView>
       </OnboardingSlider>
     </OnboardingContainer>

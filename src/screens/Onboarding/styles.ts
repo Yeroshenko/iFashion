@@ -1,6 +1,12 @@
-import { Animated } from 'react-native'
 import styled from 'styled-components/native'
-import { BackdropInnerProps, SlideContainerProps, SlideLabelProps } from './types'
+import { Animated } from 'react-native'
+import {
+  BackdropTopProps,
+  BackdropBottomProps,
+  SlideContainerProps,
+  SlideLabelProps
+} from './types'
+
 
 export const OnboardingContainer = styled.View`
   flex: 1;
@@ -11,7 +17,22 @@ export const OnboardingSlider = styled.View`
   flex: 1;
 `
 
-export const BackdropInner = styled.View<BackdropInnerProps>`
+export const BackdropTop = styled.View<BackdropTopProps>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: ${props => props.bottomHeight + 'px'};
+  background-color: ${props => props.theme.colors.white};
+`
+
+export const BackdropTopInner = styled(Animated.View)`
+  display: flex;
+  flex: 1 1 100%;
+  border-bottom-right-radius: ${props => props.theme.borderRadius.XXL};
+`
+
+export const BackdropBottom = styled.View<BackdropBottomProps>`
   height: ${props => props.height + 'px'};
   position: absolute;
   bottom: 0;
@@ -104,7 +125,7 @@ export const WelcomeFooter = styled.View`
   border-top-left-radius: ${props => props.theme.borderRadius.XXL};
   display: flex;
   align-items: center;
-  flex-direction: column
+  flex-direction: column;
 `
 
 export const WelcomeLink = styled.Text`
