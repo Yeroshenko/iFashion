@@ -12,6 +12,7 @@ declare module 'styled-components' {
       primary: string
       main: string
       defaultBtn: string
+      welcomeBg: string
     }
     borderRadius: {
       XXL: string

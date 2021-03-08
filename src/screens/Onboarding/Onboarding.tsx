@@ -9,8 +9,8 @@ import { navigationPaths } from '../../constants'
 import { BackdropInner, OnboardingContainer, OnboardingSlider } from './styles'
 
 
-const FOOTER_HEIGHT = 320
-const { width, height } = Dimensions.get('window')
+const FOOTER_HEIGHT = 300
+const { width } = Dimensions.get('window')
 const slidesInfo = [
   {
     label: 'Relaxed',
@@ -61,7 +61,7 @@ export const Onboarding: FC = () => {
   }
 
   return (
-    <OnboardingContainer height={height}>
+    <OnboardingContainer>
       <Animated.View style={[StyleSheet.absoluteFillObject, { backgroundColor }]}>
         <BackdropInner height={FOOTER_HEIGHT} />
       </Animated.View>

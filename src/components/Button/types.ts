@@ -11,4 +11,5 @@ export type ButtonProps = {
 
 export type ButtonStylesProps = {
   type: ButtonType
+  style?: ViewStyle
 }

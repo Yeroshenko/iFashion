@@ -12,7 +12,8 @@ export const ButtonWrapper = styled.TouchableOpacity<ButtonStylesProps>`
 
 export const ButtonText = styled.Text<ButtonStylesProps>`
   font-family: ${props => props.theme.fonts.SFProTextSemibold};
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 18px;
   text-align: center;
   color: ${(props) => typeToColor(props.type, props.theme)};
 `

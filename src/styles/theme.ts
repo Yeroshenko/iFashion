@@ -11,6 +11,7 @@ export const theme: DefaultTheme = {
     primary: '#2CB9B0',
     main: '#0C0D34',
     defaultBtn: '#F3F3F5',
+    welcomeBg: '#F3F0EF'
   },
   borderRadius: {
     XXL: '80px',

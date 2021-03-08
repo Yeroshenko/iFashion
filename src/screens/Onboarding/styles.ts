@@ -1,9 +1,8 @@
 import { Animated } from 'react-native'
 import styled from 'styled-components/native'
-import { BackdropInnerProps, OnboardingContainerProps, SlideContainerProps, SlideLabelProps } from './types'
+import { BackdropInnerProps, SlideContainerProps, SlideLabelProps } from './types'
 
-export const OnboardingContainer = styled.View<OnboardingContainerProps>`
-  height: ${props => props.height + 'px'};
+export const OnboardingContainer = styled.View`
   flex: 1;
   position: relative;
 `
@@ -58,7 +57,7 @@ export const OnboardingDescription = styled.Text`
   text-align: center;
   font-size: 16px;
   line-height: 24px;
-  opacity: .7;
+  opacity: 0.7;
   margin-bottom: 40px;
   color: ${props => props.theme.colors.main};
   font-family: ${props => props.theme.fonts.SFProTextRegular};
@@ -66,7 +65,7 @@ export const OnboardingDescription = styled.Text`
 
 export const ScrollDots = styled.View`
   position: absolute;
-  bottom: 280px;
+  bottom: 260px;
   left: 0;
   right: 0;
   display: flex;
@@ -84,3 +83,34 @@ export const ScrollDot = styled(Animated.View)`
   background-color: ${props => props.theme.colors.primary};
 `
 
+export const WelcomeContainer = styled(OnboardingContainer)`
+  background-color: ${props => props.theme.colors.welcomeBg};
+`
+
+export const WelcomeImageContainer = styled.View`
+  flex-grow: 1;
+  background-color: ${props => props.theme.colors.white};
+`
+
+export const WelcomeImageInner = styled.View`
+  background-color: ${props => props.theme.colors.welcomeBg};
+  flex: 1;
+  border-bottom-right-radius: ${props => props.theme.borderRadius.XXL};
+`
+
+export const WelcomeFooter = styled.View`
+  padding: 50px 40px 40px;
+  background-color: ${props => props.theme.colors.white};
+  border-top-left-radius: ${props => props.theme.borderRadius.XXL};
+  display: flex;
+  align-items: center;
+  flex-direction: column
+`
+
+export const WelcomeLink = styled.Text`
+  font-family: ${props => props.theme.fonts.SFProTextSemibold};
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  color: ${props => props.theme.colors.main};
+`
